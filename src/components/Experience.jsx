@@ -16,13 +16,15 @@ const experience = [
 ];
 
 export default function Experience(){
+
  return(
-  <section className="section" id="experience">
+  <section className="section experience-modern" id="experience">
 
     <motion.h1
       className="gradient"
-      initial={{ opacity:0, y:20 }}
-      whileInView={{ opacity:1, y:0 }}
+      initial={{opacity:0,y:20}}
+      whileInView={{opacity:1,y:0}}
+      viewport={{once:true}}
     >
       Experience
     </motion.h1>
@@ -33,10 +35,11 @@ export default function Experience(){
         <motion.div
           key={i}
           className="exp-card glass-hover"
-          initial={{ opacity:0, y:40 }}
-          whileInView={{ opacity:1, y:0 }}
-          transition={{ duration:.6, delay:i*.15 }}
-          whileHover={{ scale:1.03 }}
+          initial={{opacity:0,y:40}}
+          whileInView={{opacity:1,y:0}}
+          viewport={{once:true}}
+          transition={{duration:.6,delay:i*.15}}
+          whileHover={{scale:1.04,y:-6}}
         >
 
           <div className="exp-header">

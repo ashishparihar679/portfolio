@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import cert from "../assets/certificate.jpg"; // apni certificate image yahan rakho
+import cert from "../assets/certificate.jpg";
 
 const data = [
   {
@@ -38,21 +38,26 @@ function Counter({ to, suffix }) {
 
   useEffect(() => {
     if (!to) return;
+
     let start = 0;
     const step = Math.ceil(to / 40);
-    const t = setInterval(() => {
+
+    const timer = setInterval(() => {
       start += step;
+
       if (start >= to) {
         start = to;
-        clearInterval(t);
+        clearInterval(timer);
       }
+
       setCount(start);
-    }, 30);
-    return () => clearInterval(t);
+    }, 25);
+
+    return () => clearInterval(timer);
   }, [to]);
 
   return (
-    <span>
+    <span className="counter">
       {to ? count : ""}
       {suffix}
     </span>
@@ -63,48 +68,68 @@ export default function Achievements() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="section" id="achievements">
+    <section className="section achievements-section" id="achievements">
       <motion.h1
         className="gradient"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
       >
         Achievements
       </motion.h1>
 
       {/* Timeline */}
+
       <div className="timeline">
+
         {data.map((a, i) => (
+
           <motion.div
             key={i}
-            className="timeline-item"
+            className="timeline-item glass-hover"
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.15, type: "spring", stiffness: 80 }}
-            whileHover={{ scale: 1.02 }}
-            onClick={() => a.title === "IBM Certificate" && setOpen(true)}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.15 }}
+            whileHover={{ scale: 1.04 }}
+            onClick={() =>
+              a.title === "IBM Certificate" && setOpen(true)
+            }
           >
+
             <div className="timeline-icon">{a.icon}</div>
 
             <div className="timeline-content">
+
               <h3>
                 {a.title}{" "}
-                {a.value && <Counter to={a.value} suffix={a.suffix} />}
+                {a.value && (
+                  <Counter to={a.value} suffix={a.suffix} />
+                )}
               </h3>
+
               <p>{a.desc}</p>
+
               {a.title === "IBM Certificate" && (
-                <small style={{ opacity: 0.6 }}>
+                <small className="view-cert">
                   Click to view certificate
                 </small>
               )}
+
             </div>
+
           </motion.div>
+
         ))}
+
       </div>
 
       {/* Certificate Modal */}
+
       <AnimatePresence>
+
         {open && (
+
           <motion.div
             className="modal"
             initial={{ opacity: 0 }}
@@ -112,25 +137,37 @@ export default function Achievements() {
             exit={{ opacity: 0 }}
             onClick={() => setOpen(false)}
           >
+
             <motion.div
               className="modal-box"
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
+              initial={{ scale: 0.8, y: 40 }}
+              animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8 }}
+              transition={{ type: "spring", stiffness: 120 }}
               onClick={(e) => e.stopPropagation()}
             >
+
               <img
                 src={cert}
                 alt="certificate"
-                style={{ width: "100%", borderRadius: 12 }}
+                className="cert-img"
               />
-              <button className="btn" onClick={() => setOpen(false)}>
+
+              <button
+                className="btn-modern"
+                onClick={() => setOpen(false)}
+              >
                 Close
               </button>
+
             </motion.div>
+
           </motion.div>
+
         )}
+
       </AnimatePresence>
+
     </section>
   );
 }

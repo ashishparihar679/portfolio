@@ -29,12 +29,13 @@ export default function Education(){
   <section className="section education-modern" id="education">
 
     <motion.h1
-      className="gradient"
-      initial={{ opacity:0, y:20 }}
-      whileInView={{ opacity:1, y:0 }}
-    >
-      Education
-    </motion.h1>
+ className="gradient"
+ initial={{ opacity:0, y:20 }}
+ whileInView={{ opacity:1, y:0 }}
+ viewport={{ once:true }}
+>
+ Education
+</motion.h1>
 <div className="edu-wrapper">
 
   <motion.div
@@ -51,7 +52,8 @@ export default function Education(){
       className="edu-center"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: i * 0.2 }}
+     transition={{ delay: i * 0.2 }}
+     viewport={{ once:true }}
     >
       <motion.div
         className="edu-card-modern"
