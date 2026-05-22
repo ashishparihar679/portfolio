@@ -1,45 +1,74 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
+// import "./Projects.css";
 
 const projects = [
+
  {
-  title:"Education Website – Full Stack",
-  tech:["React.js","Django","MySQL"],
-  github:"https://github.com/ashishparihar679/eduction",
-  demo:"",
-  video:"https://res.cloudinary.com/diqthlga3/video/upload/v1764539095/Screen_Recording_2025-01-19_180651_s74qfz.mp4",
-  desc:"Full-stack education platform with React frontend and Django REST backend.",
-  points:[
-   "React reusable components",
-   "Django REST APIs",
-   "MySQL database",
-   "CRUD operations",
-   "Responsive UI"
+  title: "Smart Home Service Platform",
+  tech: ["React.js", "Django", "MySQL"],
+  github: "https://github.com/ashishparihar679/smarthome",
+  demo: "https://homeservice-ecru.vercel.app/login",
+  video:
+   "https://res.cloudinary.com/diqthlga3/video/upload/v1764539095/Screen_Recording_2025-01-19_180651_s74qfz.mp4",
+  desc:
+   "Premium home service booking platform with authentication and service management system.",
+  points: [
+   "Service booking functionality",
+   "JWT authentication system",
+   "Responsive React frontend",
+   "REST API integration",
+   "Django + MySQL backend",
+   "Live deployed project"
   ]
  },
 
  {
-  title:"React CRUD Dashboard",
-  tech:["React.js","JavaScript"],
-  github:"https://github.com/ashishparihar679/react-crud-dashboard",
-  demo:"",
-  video:"https://res.cloudinary.com/diqthlga3/video/upload/v1764539095/Screen_Recording_2025-01-19_180651_s74qfz.mp4",
-  desc:"Modern CRUD dashboard built using React functional components.",
-  points:[
-   "Create / Read / Update / Delete",
-   "Component-based UI",
-   "Responsive layout"
+  title: "Education Website – Full Stack",
+  tech: ["React.js", "Django", "MySQL"],
+  github: "https://github.com/ashishparihar679/eduction",
+  demo: "",
+  video:
+   "https://res.cloudinary.com/diqthlga3/video/upload/v1764539095/Screen_Recording_2025-01-19_180651_s74qfz.mp4",
+  desc:
+   "Modern full-stack education platform with interactive frontend and backend APIs.",
+  points: [
+   "Reusable React components",
+   "Responsive UI/UX",
+   "CRUD operations",
+   "REST APIs with Django",
+   "MySQL database management"
+  ]
+ },
+
+ {
+  title: "React CRUD Dashboard",
+  tech: ["React.js", "JavaScript"],
+  github: "https://github.com/ashishparihar679/react-crud-dashboard",
+  demo: "",
+  video:
+   "https://res.cloudinary.com/diqthlga3/video/upload/v1764539095/Screen_Recording_2025-01-19_180651_s74qfz.mp4",
+  desc:
+   "Interactive dashboard application using React functional components and CRUD operations.",
+  points: [
+   "Create / Update / Delete",
+   "Component architecture",
+   "Responsive layout",
+   "Modern UI design"
   ]
  }
+
 ];
 
-function ProjectCard({p,index}){
+function ProjectCard({ project, index }) {
 
  const videoRef = useRef(null);
 
- const play = ()=>videoRef.current?.play();
+ const playVideo = () => {
+  videoRef.current?.play();
+ };
 
- const stop = ()=>{
+ const stopVideo = () => {
   if(videoRef.current){
    videoRef.current.pause();
    videoRef.current.currentTime = 0;
@@ -49,84 +78,88 @@ function ProjectCard({p,index}){
  return(
 
   <motion.div
-   className="project-card glass-hover"
-   initial={{opacity:0,y:40}}
-   whileInView={{opacity:1,y:0}}
-   viewport={{once:true}}
-   transition={{delay:index*0.15}}
-   whileHover={{y:-12,scale:1.02}}
+   className="premium-project-card"
+   initial={{ opacity:0, y:40 }}
+   whileInView={{ opacity:1, y:0 }}
+   viewport={{ once:true }}
+   transition={{ duration:0.5, delay:index * 0.15 }}
+   whileHover={{ y:-8 }}
   >
 
-   {/* VIDEO PREVIEW */}
+   {/* VIDEO */}
 
    <div
-    className="project-media"
-    onMouseEnter={play}
-    onMouseLeave={stop}
+    className="premium-video-box"
+    onMouseEnter={playVideo}
+    onMouseLeave={stopVideo}
    >
 
     <video
      ref={videoRef}
-     src={p.video}
+     src={project.video}
      muted
      loop
      playsInline
      preload="none"
     />
 
-    <div className="video-overlay">
-     Hover to Preview
+    <div className="premium-video-overlay">
+     Preview Project
     </div>
 
    </div>
 
-   <h3>{p.title}</h3>
+   {/* TITLE */}
+
+   <h2 className="premium-project-title">
+    {project.title}
+   </h2>
 
    {/* TECH STACK */}
 
-   <div className="tech-row">
+   <div className="premium-tech-stack">
 
-    {p.tech.map((t,i)=>(
-     <span key={i}>{t}</span>
+    {project.tech.map((tech, i)=>(
+     <span key={i}>{tech}</span>
     ))}
 
    </div>
 
-   <p className="project-desc">
-    {p.desc}
+   {/* DESCRIPTION */}
+
+   <p className="premium-project-desc">
+    {project.desc}
    </p>
 
-   <ul>
+   {/* POINTS */}
 
-    {p.points.map((pt,i)=>(
-     <li key={i}>✔ {pt}</li>
+   <ul className="premium-points-list">
+
+    {project.points.map((point, i)=>(
+     <li key={i}>✔ {point}</li>
     ))}
 
    </ul>
 
-   {/* ACTION BUTTONS */}
+   {/* BUTTONS */}
 
-   <div className="project-actions">
+   <div className="premium-project-buttons">
 
-    <a
-     href={p.github}
-     target="_blank"
-     rel="noreferrer"
-     className="btn-outline"
+    <button
+     className="premium-github-btn"
+     onClick={() => window.open(project.github, "_blank")}
     >
      GitHub
-    </a>
+    </button>
 
-    {p.demo && (
+    {project.demo && (
 
-     <a
-      href={p.demo}
-      target="_blank"
-      rel="noreferrer"
-      className="btn-main"
+     <button
+      className="premium-live-btn"
+      onClick={() => window.open(project.demo, "_blank")}
      >
       Live Demo
-     </a>
+     </button>
 
     )}
 
@@ -135,31 +168,37 @@ function ProjectCard({p,index}){
   </motion.div>
 
  )
+
 }
 
 export default function Projects(){
 
  return(
 
-  <section className="section projects-section" id="projects">
+  <section
+   className="premium-project-section"
+   id="projects"
+  >
 
    <motion.h1
-    className="gradient"
-    initial={{opacity:0,y:20}}
-    whileInView={{opacity:1,y:0}}
-    viewport={{once:true}}
+    className="premium-project-heading"
+    initial={{ opacity:0, y:20 }}
+    whileInView={{ opacity:1, y:0 }}
+    viewport={{ once:true }}
    >
-    Projects
+    Featured Projects
    </motion.h1>
 
-   <div className="project-grid">
+   <div className="premium-project-grid">
 
-    {projects.map((p,i)=>(
+    {projects.map((project, index)=>(
+
      <ProjectCard
-      key={i}
-      p={p}
-      index={i}
+      key={index}
+      project={project}
+      index={index}
      />
+
     ))}
 
    </div>
@@ -167,4 +206,5 @@ export default function Projects(){
   </section>
 
  )
+
 }

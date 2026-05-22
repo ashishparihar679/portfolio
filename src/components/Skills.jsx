@@ -5,7 +5,7 @@ const skills = [
  { name:"CSS3", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"},
  { name:"JavaScript", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"},
  { name:"React", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"},
- { name:"Node.js", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"},
+//  { name:"Node.js", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"},
  { name:"Python", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"},
  { name:"Django", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"},
  { name:"MySQL", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"},
