@@ -10,6 +10,7 @@ const data = [
     suffix: "+",
     desc: "Solved 100+ DSA problems using C++ (LeetCode + practice).",
   },
+
   {
     icon: "🧩",
     title: "Full Stack Projects",
@@ -17,6 +18,7 @@ const data = [
     suffix: "+",
     desc: "React + Django projects with REST APIs and MySQL.",
   },
+
   {
     icon: "⭐",
     title: "HackerRank",
@@ -24,12 +26,27 @@ const data = [
     suffix: "★",
     desc: "3-Star rating in C++ on HackerRank.",
   },
+
   {
     icon: "🎓",
     title: "IBM Certificate",
     value: null,
     suffix: "",
     desc: "IBM Full Stack Software Developer (Coursera).",
+  },
+
+  {
+    icon: "🚀",
+    title: "AI Powered Career Boost Hackathon",
+    value: null,
+    suffix: "",
+    desc:
+      "Participated in Navkalpana AI Powered Career Boost Hackathon and developed an AI-based career guidance platform as a group project.",
+
+    live: "https://lnkd.in/d32HjzHU",
+
+    github:
+      "https://github.com/AjayGour09/Navkalpana-RICR-NK-0030",
   },
 ];
 
@@ -40,6 +57,7 @@ function Counter({ to, suffix }) {
     if (!to) return;
 
     let start = 0;
+
     const step = Math.ceil(to / 40);
 
     const timer = setInterval(() => {
@@ -68,7 +86,10 @@ export default function Achievements() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="section achievements-section" id="achievements">
+    <section
+      className="section achievements-section"
+      id="achievements"
+    >
       <motion.h1
         className="gradient"
         initial={{ opacity: 0, y: 25 }}
@@ -93,22 +114,36 @@ export default function Achievements() {
             transition={{ delay: i * 0.15 }}
             whileHover={{ scale: 1.04 }}
             onClick={() =>
-              a.title === "IBM Certificate" && setOpen(true)
+              a.title === "IBM Certificate" &&
+              setOpen(true)
             }
           >
 
-            <div className="timeline-icon">{a.icon}</div>
+            <div className="timeline-icon">
+              {a.icon}
+            </div>
 
             <div className="timeline-content">
 
               <h3>
                 {a.title}{" "}
-                {a.value && (
-                  <Counter to={a.value} suffix={a.suffix} />
-                )}
-              </h3>
 
+                {a.value && (
+                  <Counter
+                    to={a.value}
+                    suffix={a.suffix}
+                  />
+                )}
+
+              </h3>
               <p>{a.desc}</p>
+
+              {/* Hackathon Buttons */}
+
+             
+
+
+              {/* Certificate */}
 
               {a.title === "IBM Certificate" && (
                 <small className="view-cert">
@@ -143,7 +178,10 @@ export default function Achievements() {
               initial={{ scale: 0.8, y: 40 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8 }}
-              transition={{ type: "spring", stiffness: 120 }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+              }}
               onClick={(e) => e.stopPropagation()}
             >
 

@@ -56,7 +56,40 @@ const projects = [
    "Responsive layout",
    "Modern UI design"
   ]
- }
+ },
+ {
+  title: "AI Powered Career Boost Hackathon",
+  
+  tech: [
+    "React.js",
+    "Django",
+    "MySQL",
+    "AI Integration"
+  ],
+
+  github:
+    "https://github.com/AjayGour09/Navkalpana-RICR-NK-0030",
+
+  demo:
+    "https://flux-as.netlify.app/",
+
+  video:
+    "https://res.cloudinary.com/diqthlga3/video/upload/v1764539095/Screen_Recording_2025-01-19_180651_s74qfz.mp4",
+
+  desc:
+    "AI-powered career guidance platform developed during Navkalpana Hackathon as a collaborative group project.",
+
+  points: [
+    "AI Resume Analysis & Skill Extraction",
+    "Resume vs Job Role Matching Score",
+    "AI Skill Gap Detection System",
+    "Personalized Quiz & Assignment Generator",
+    "AI Mock Interview Engine",
+    "Performance Tracking Dashboard",
+    "React + Django Full Stack Architecture",
+    "Team-based Hackathon Project"
+  ]
+},
 
 ];
 
