@@ -137,7 +137,7 @@ function ProjectCard({ project, index }) {
     />
 
     <div className="premium-video-overlay">
-     Previeww Project
+     Preview Project
     </div>
 
    </div>

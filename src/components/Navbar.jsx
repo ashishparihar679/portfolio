@@ -33,7 +33,7 @@ export default function Navbar(){
     ))}
 
     <a
-     href="/resume.pdf"
+     href="/Ashish_Ahirwar_Python.pdf"
      download
      className="resume-btn"
     >
