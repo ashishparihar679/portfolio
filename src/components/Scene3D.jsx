@@ -1,12 +1,14 @@
 import { useRef } from "react";
+import { useReducedMotion } from "framer-motion";
 import portrait from "../assets/profile.jpg";
 
 /** A lightweight, pointer-reactive CSS 3D scene; it needs no WebGL runtime. */
 export default function Scene3D() {
   const sceneRef = useRef(null);
+  const reduceMotion = useReducedMotion();
 
   const handlePointerMove = (event) => {
-    if (event.pointerType !== "mouse" || !sceneRef.current) return;
+    if (reduceMotion || event.pointerType !== "mouse" || !sceneRef.current) return;
     const bounds = sceneRef.current.getBoundingClientRect();
     const x = (event.clientX - bounds.left) / bounds.width - 0.5;
     const y = (event.clientY - bounds.top) / bounds.height - 0.5;

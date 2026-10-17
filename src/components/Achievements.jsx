@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { motion as Motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { FiAward, FiCode, FiLayers, FiBookOpen, FiZap } from "react-icons/fi";
-import cert from "../assets/certificate.jpg";
+import cert from "../assets/ibm.jpg";
 
 const data = [
   {
@@ -15,9 +15,9 @@ const data = [
   {
     icon: FiLayers,
     title: "Full Stack Projects",
-    value: 5,
-    suffix: "+",
-    desc: "React + Django projects with REST APIs and MySQL.",
+    value: 3,
+    suffix: "",
+    desc: "Three full-stack and collaborative builds are showcased in my selected work.",
   },
 
   {
@@ -30,10 +30,10 @@ const data = [
 
   {
     icon: FiBookOpen,
-    title: "IBM Certificate",
+    title: "IBM Cybersecurity Analyst Certificate",
     value: null,
     suffix: "",
-    desc: "IBM Full Stack Software Developer (Coursera).",
+    desc: "IBM Cybersecurity Analyst Professional Certificate (SkillsBuild).",
   },
 
   {
@@ -53,9 +53,10 @@ const data = [
 
 function Counter({ to, suffix }) {
   const [count, setCount] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (!to) return;
+    if (!to || reduceMotion) return undefined;
 
     let start = 0;
 
@@ -73,11 +74,13 @@ function Counter({ to, suffix }) {
     }, 25);
 
     return () => clearInterval(timer);
-  }, [to]);
+  }, [to, reduceMotion]);
+
+  const displayCount = reduceMotion ? to : count;
 
   return (
     <span className="counter">
-      {to ? count : ""}
+      {to ? displayCount : ""}
       {suffix}
     </span>
   );
@@ -117,7 +120,7 @@ function AchievementCard({ achievement, index, onViewCertificate }) {
         <p>{achievement.desc}</p>
       </div>
       <div className="achievement-actions">
-        {achievement.title === "IBM Certificate" && (
+        {achievement.title === "IBM Cybersecurity Analyst Certificate" && (
           <button type="button" className="achievement-link" onClick={onViewCertificate}>View certificate ↗</button>
         )}
         {achievement.live && <a className="achievement-link" href={achievement.live} target="_blank" rel="noopener noreferrer">Live project ↗</a>}
@@ -147,15 +150,17 @@ export default function Achievements() {
     <section
       className="section achievements-section"
       id="achievements"
+      aria-labelledby="achievements-title"
     >
       <div className="achievement-heading">
-        <Motion.h1
+        <Motion.h2
+          id="achievements-title"
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           Achievements<span>.</span>
-        </Motion.h1>
+        </Motion.h2>
         <p>Milestones and projects that reflect my growth as a developer.</p>
       </div>
 
@@ -188,7 +193,7 @@ export default function Achievements() {
               className="modal-box"
               role="dialog"
               aria-modal="true"
-              aria-label="IBM Full Stack Software Developer certificate"
+              aria-label="IBM Cybersecurity Analyst Professional Certificate"
               tabIndex={-1}
               initial={{ scale: 0.8, y: 40 }}
               animate={{ scale: 1, y: 0 }}
@@ -202,7 +207,7 @@ export default function Achievements() {
 
               <img
                 src={cert}
-                alt="IBM Full Stack Software Developer certificate"
+                alt="IBM Cybersecurity Analyst Professional Certificate awarded to Ashish Ahirwar"
                 className="cert-img"
               />
 

@@ -88,7 +88,7 @@ export default function Hero(){
      <a
       href="https://github.com/ashishparihar679"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className="social github"
      >
       <FaGithub/>
@@ -97,7 +97,7 @@ export default function Hero(){
      <a
       href="https://www.linkedin.com/in/ashish-ahirwar-6268ap0000/"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className="social linkedin"
      >
       <FaLinkedin/>

@@ -13,7 +13,6 @@ export default function Contact() {
     register,
     handleSubmit,
     reset,
-    getValues,
     formState: { errors, isSubmitting },
   } = useForm();
   const [copied, setCopied] = useState(false);
@@ -50,22 +49,12 @@ export default function Contact() {
     }
   };
 
-  const sendOnWhatsApp = () => {
-    const { name, email, message } = getValues();
-    if (!name?.trim() || !email?.trim() || !message?.trim()) {
-      toast.error("Please fill in your name, email, and message first.");
-      return;
-    }
-
-    const text = `Hi Ashish, I'm ${name.trim()} (${email.trim()}).\n\n${message.trim()}`;
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
-  };
-
   return (
 
     <section
       className="section contact"
       id="contact"
+      aria-labelledby="contact-title"
     >
 
       <div className="contact-bg-blur one"></div>
@@ -93,9 +82,9 @@ export default function Contact() {
             LET'S CONNECT
           </span>
 
-          <h1 className="gradient contact-title">
+          <h2 className="gradient contact-title" id="contact-title">
             Contact Me
-          </h1>
+          </h2>
 
           <p className="contact-text">
             Let’s build modern and impactful digital
@@ -129,13 +118,13 @@ export default function Contact() {
               <span>📞</span>
 
               <div>
-                <h4>Phone</h4>
+                <h4>WhatsApp</h4>
 
                 <a
                   href={`https://wa.me/${whatsappNumber}`}
                   className="contact-link"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   WhatsApp: +91 6268401268 ↗
                 </a>
@@ -161,7 +150,7 @@ export default function Contact() {
             <a
               href="https://github.com/ashishparihar679"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               GitHub
             </a>
@@ -169,7 +158,7 @@ export default function Contact() {
             <a
               href="https://www.linkedin.com/in/ashish-ahirwar-6268ap0000/"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               LinkedIn
             </a>
@@ -233,10 +222,6 @@ export default function Contact() {
           >
             {isSubmitting ? "Sending…" : "Send Message →"}
           </Motion.button>
-
-          <button className="btn-modern send-btn whatsapp-send-btn" type="button" onClick={sendOnWhatsApp}>
-            Send via WhatsApp ↗
-          </button>
 
         </Motion.form>
 

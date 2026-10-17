@@ -32,17 +32,20 @@ export default function App(){
 
    <div className="glass">
 
+    <a className="skip-link" href="#main-content">Skip to content</a>
     <Navbar/>
 
-    <Hero/>
-    <About/>
-    <Skills/>
-    <Projects/>
-    <Experience/>
-    <Education/>
-    <Certifications/>
-    <Achievements/>
-    <Contact/>
+    <main id="main-content" tabIndex="-1">
+     <Hero/>
+     <About/>
+     <Skills/>
+     <Projects/>
+     <Experience/>
+     <Education/>
+     <Certifications/>
+     <Achievements/>
+     <Contact/>
+    </main>
     <Footer/>
 
    </div>

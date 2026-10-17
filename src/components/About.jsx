@@ -1,8 +1,8 @@
 import { motion as Motion } from "framer-motion";
-import img from "../assets/ashish-office-headshot.png";
+import img from "../assets/ashish-office-headshot.webp";
 
 const facts = [
-  { label: "Study", value: "B.Tech · Computer Science" },
+  { label: "Education", value: "B.Tech · Computer Science" },
   { label: "Build with", value: "React · Python · Django" },
   { label: "Currently seeking", value: "Software development opportunities" },
 ];
@@ -34,10 +34,10 @@ export default function About() {
             I like making the <em>complex</em> feel simple.
           </Motion.h2>
           <p>
-            I’m a Computer Science Engineering student focused on full-stack development. I build responsive web applications with React, Python, Django, Django REST Framework and MySQL, paying attention to clear interfaces, reliable APIs and useful details.
+            I’m a Computer Science Engineering graduate focused on full-stack development. I build responsive web applications with React, Python, Django, Django REST Framework and MySQL, paying attention to clear interfaces, reliable APIs and useful details.
           </p>
           <p>
-            Outside product work, I practice Data Structures and Algorithms in C++. I’ve solved 100+ problems and completed the IBM Full Stack Software Developer certificate. I’m looking for software development opportunities where I can keep learning and contribute to real products.
+            Outside product work, I practice Data Structures and Algorithms in C++. I’ve solved 100+ problems and completed the IBM Cybersecurity Analyst Professional Certificate. I’m looking for software development opportunities where I can keep learning and contribute to real products.
           </p>
 
           <div className="about-facts">

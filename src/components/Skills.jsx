@@ -1,26 +1,31 @@
 import { motion as Motion } from "framer-motion";
+import { FiMonitor, FiServer, FiDatabase, FiTool } from "react-icons/fi";
 
 const groups = [
   {
     number: "01",
+    icon: FiMonitor,
     title: "Frontend",
     description: "Responsive interfaces, reusable components and polished user experiences.",
     skills: ["HTML5", "CSS3", "JavaScript", "React.js", "Figma"],
   },
   {
     number: "02",
+    icon: FiServer,
     title: "Backend",
     description: "Application logic and REST APIs built with Python and Django.",
     skills: ["Python", "Django", "Django REST Framework", "REST APIs"],
   },
   {
     number: "03",
+    icon: FiDatabase,
     title: "Data & problem solving",
     description: "Relational data workflows and algorithmic problem solving.",
     skills: ["MySQL", "C++", "Data Structures & Algorithms"],
   },
   {
     number: "04",
+    icon: FiTool,
     title: "Tools & workflow",
     description: "Tools used to build, test, version and deliver applications.",
     skills: ["Git", "GitHub", "Postman"],
@@ -57,7 +62,10 @@ export default function Skills() {
             transition={{ duration: 0.45, delay: index * 0.08 }}
             whileHover={{ y: -5, rotateX: 2, rotateY: index % 2 ? -2 : 2 }}
           >
-            <span className="skill-group-number">{group.number}</span>
+            <div className="skill-group-top">
+              <span className="skill-group-number">{group.number}</span>
+              <span className="skill-group-icon" aria-hidden="true"><group.icon /></span>
+            </div>
             <h3>{group.title}</h3>
             <p>{group.description}</p>
             <div className="skill-tags">

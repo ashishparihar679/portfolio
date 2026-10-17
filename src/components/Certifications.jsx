@@ -8,27 +8,27 @@ import pythonCert from "../assets/pythonCert.jpg";
 
 const certs = [
   {
-    org: "IBM",
-    title: "Full Stack Software Developer",
-    skills: "React • Django • REST APIs • MySQL",
+    org: "IBM SkillsBuild",
+    title: "Cybersecurity Analyst Professional Certificate",
+    skills: "Professional Certificate · Completed June 2024",
     img: ibmCert,
   },
   {
-    org: "Tata",
-    title: "Software / Digital Skills",
-    skills: "Frontend • Problem Solving • Git",
+    org: "Tata · Forage",
+    title: "GenAI Powered Data Analytics Job Simulation",
+    skills: "Completed January 24, 2026",
     img: tataCert,
   },
   {
-    org: "Deloitte",
-    title: "Technology / Virtual Internship",
-    skills: "Web Dev • APIs • Best Practices",
+    org: "Deloitte · Forage",
+    title: "Data Analytics Job Simulation",
+    skills: "Completed January 25, 2026",
     img: deloitteCert,
   },
   {
-    org: "Python Full Stack",
+    org: "Cybrom Technology Pvt. Ltd.",
     title: "Python Full Stack Development",
-    skills: "Python • Django • React • MySQL • REST APIs",
+    skills: "6-month training · Completed January 2026",
     img: pythonCert,
   },
 ];
@@ -51,22 +51,23 @@ export default function Certifications(){
   }, [open]);
 
   return(
-    <section className="section certifications-section" id="certifications">
+    <section className="section certifications-section" id="certifications" aria-labelledby="certifications-title">
 
-      <Motion.h1
+      <Motion.h2
+        id="certifications-title"
         className="gradient"
         initial={{opacity:0,y:25}}
         whileInView={{opacity:1,y:0}}
         viewport={{once:true}}
       >
         Certifications
-      </Motion.h1>
+      </Motion.h2>
 
       <div className="cert-grid">
 
         {certs.map((c,i)=>(
           <Motion.button
-            key={i}
+            key={c.org}
             type="button"
             className="cert-card glass-hover"
             initial={{ opacity:0, y:40 }}

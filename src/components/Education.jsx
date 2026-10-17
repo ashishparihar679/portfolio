@@ -9,17 +9,17 @@ const education = [
     institution: "Technocrats Institute of Technology & Science",
     location: "Bhopal, Madhya Pradesh, India",
     score: "7.4 CGPA",
-    scoreNote: "in Btech",
-    description: "Final year student · Affiliated to RGPV University",
+    scoreNote: "out of 10",
+    description: "B.Tech graduate · Affiliated to RGPV University",
     subjects: ["DSA", "DBMS", "Operating Systems", "React.js", "Django", "MySQL"],
     featured: true,
   },
   {
     icon: FiBookOpen,
-    year: "2022",
+    year: "2021 – 2022",
     degree: "Higher Secondary (Class 12)",
     institution: "Anand Vihar Model Higher Secondary School",
-    location: "Babai, Hoshangabad",
+    location: "Babai, Narmadapuram, Madhya Pradesh",
     score: "66%",
     scoreNote: "Science Stream · PCM",
     description: "Higher secondary education",
@@ -27,10 +27,10 @@ const education = [
   },
   {
     icon: FiAward,
-    year: "2020",
+    year: "2019 – 2020",
     degree: "Secondary (Class 10)",
     institution: "Anand Vihar Model Higher Secondary School",
-    location: "Babai, Hoshangabad",
+    location: "Babai, Narmadapuram, Madhya Pradesh",
     score: "68.75%",
     scoreNote: "Percentage",
     description: "Completed secondary education",
@@ -56,14 +56,14 @@ export default function Education() {
   return (
     <section className="section education-modern" id="education" aria-labelledby="education-title">
       <div className="education-heading">
-        <Motion.h1
+        <Motion.h2
           id="education-title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           Education<span>.</span>
-        </Motion.h1>
+        </Motion.h2>
         <p>My academic journey, from foundational studies to computer science.</p>
       </div>
 

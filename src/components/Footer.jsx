@@ -22,7 +22,7 @@ export default function Footer(){
      <a
       href="https://github.com/ashishparihar679"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       aria-label="GitHub profile"
      >
       <FaGithub/>
@@ -31,7 +31,7 @@ export default function Footer(){
      <a
       href="https://www.linkedin.com/in/ashish-ahirwar-6268ap0000/"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       aria-label="LinkedIn profile"
      >
       <FaLinkedin/>

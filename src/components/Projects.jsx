@@ -1,4 +1,4 @@
-import { motion as Motion } from "framer-motion";
+import { motion as Motion, useReducedMotion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 
 const projects = [
@@ -8,7 +8,7 @@ const projects = [
     title: "Smart Home Service Platform",
     tech: ["React.js", "Django", "MySQL", "JWT"],
     github: "https://github.com/ashishparihar679/smarthome",
-    demo: "https://homeservice-ecru.vercel.app/login",
+    demo: "https://homeservice-ecru.vercel.app/",
     video: "https://res.cloudinary.com/diqthlga3/video/upload/v1764539095/Screen_Recording_2025-01-19_180651_s74qfz.mp4",
     desc: "Premium home service booking platform with authentication and service management system.",
     points: ["Service booking functionality", "JWT authentication system", "Responsive React frontend", "REST API integration", "Django + MySQL backend", "Live deployed project"],
@@ -66,6 +66,7 @@ function ProjectPreview({ type, title }) {
 }
 
 function ProjectCard({ project, index }) {
+  const reduceMotion = useReducedMotion();
   return (
     <Motion.article
       className={`project-case project-case-${index + 1}`}
@@ -83,6 +84,7 @@ function ProjectCard({ project, index }) {
         transitionSpeed={900}
         glareEnable={false}
         gyroscope={false}
+        tiltEnable={!reduceMotion}
       >
         <ProjectPreview type={project.preview} title={project.title} />
       </Tilt>

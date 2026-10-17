@@ -24,14 +24,14 @@ export default function Experience() {
   return (
     <section className="section experience-modern" id="experience" aria-labelledby="experience-title">
       <div className="experience-heading">
-        <Motion.h1
+        <Motion.h2
           id="experience-title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           Experience<span>.</span>
-        </Motion.h1>
+        </Motion.h2>
         <p>Professional experience and the work I built along the way.</p>
       </div>
 
