@@ -1,5 +1,5 @@
 import { motion as Motion } from "framer-motion";
-import img from "../assets/profile1.jpg";
+import img from "../assets/ashish-office-headshot.png";
 
 const facts = [
   { label: "Study", value: "B.Tech · Computer Science" },

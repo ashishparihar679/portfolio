@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 
 const emailAddress = "ashishparihar679@gmail.com";
+const whatsappNumber = "916268401268";
 
 export default function Contact() {
 
@@ -12,6 +13,7 @@ export default function Contact() {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm();
   const [copied, setCopied] = useState(false);
@@ -46,6 +48,17 @@ export default function Contact() {
     } catch {
       toast.error("Copy wasn’t available. Use the email link instead.");
     }
+  };
+
+  const sendOnWhatsApp = () => {
+    const { name, email, message } = getValues();
+    if (!name?.trim() || !email?.trim() || !message?.trim()) {
+      toast.error("Please fill in your name, email, and message first.");
+      return;
+    }
+
+    const text = `Hi Ashish, I'm ${name.trim()} (${email.trim()}).\n\n${message.trim()}`;
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -119,10 +132,12 @@ export default function Contact() {
                 <h4>Phone</h4>
 
                 <a
-                  href="tel:916268401268"
+                  href={`https://wa.me/${whatsappNumber}`}
                   className="contact-link"
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  +91 6268401268
+                  WhatsApp: +91 6268401268 ↗
                 </a>
               </div>
             </div>
@@ -218,6 +233,10 @@ export default function Contact() {
           >
             {isSubmitting ? "Sending…" : "Send Message →"}
           </Motion.button>
+
+          <button className="btn-modern send-btn whatsapp-send-btn" type="button" onClick={sendOnWhatsApp}>
+            Send via WhatsApp ↗
+          </button>
 
         </Motion.form>
 
