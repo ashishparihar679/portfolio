@@ -1,98 +1,89 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion as Motion } from "framer-motion";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const links = [
- "home","about","skills","projects","education","contact"
+  ["home", "Home"],
+  ["about", "About"],
+  ["skills", "Skills"],
+  ["projects", "Projects"],
+  ["experience", "Experience"],
+  ["education", "Education"],
+  ["certifications", "Certifications"],
+  ["achievements", "Achievements"],
+  ["contact", "Contact"],
 ];
 
-export default function Navbar(){
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("home");
 
- const [open,setOpen] = useState(false);
+  useEffect(() => {
+    const sections = links.map(([id]) => document.getElementById(id)).filter(Boolean);
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActive(visible.target.id);
+    }, { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.15, 0.35, 0.6] });
 
- return(
-  <nav className="nav glass-nav">
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
-   {/* Logo */}
+  useEffect(() => {
+    if (!open) return undefined;
+    const closeOnEscape = (event) => { if (event.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
 
-   <h3 className="gradient logo">Ashish.dev</h3>
-
-   {/* Desktop Links */}
-
-   <div className="nav-links desktop">
-
-    {links.map((l,i)=>(
-      <motion.a
-        key={l}
-        href={`#${l}`}
-        whileHover={{y:-2}}
-        transition={{type:"spring",stiffness:300}}
-      >
-        {l.toUpperCase()}
-        <span></span>
-      </motion.a>
-    ))}
-
+  const renderLinks = (mobile = false) => links.map(([id, label]) => (
     <a
-     href="/Ashish_Ahirwar_Python.pdf"
-     download
-     className="resume-btn"
+      key={id}
+      href={`#${id}`}
+      className={active === id ? "is-active" : ""}
+      aria-current={active === id ? "location" : undefined}
+      onClick={() => setOpen(false)}
     >
-     Resume
+      {label}
+      {mobile && active === id && <span className="mobile-active-mark" aria-hidden="true">↗</span>}
     </a>
+  ));
 
-   </div>
+  return (
+    <nav className="nav glass-nav" aria-label="Main navigation">
+      <a className="logo" href="#home" onClick={() => setOpen(false)} aria-label="Ashish Ahirwar home">Ashish<span>.dev</span></a>
 
+      <div className="nav-links desktop">
+        {renderLinks()}
+        <a href="/Ashish_Ahirwar_Python.pdf" download className="resume-btn">Résumé <span aria-hidden="true">↓</span></a>
+      </div>
 
-   {/* Hamburger */}
-
-   <div
-    className={`hamburger ${open ? "active":""}`}
-    onClick={()=>setOpen(!open)}
-   >
-    <span></span>
-    <span></span>
-    <span></span>
-   </div>
-
-
-   {/* Mobile Menu */}
-
-   <AnimatePresence>
-
-    {open && (
-
-     <motion.div
-      className="mobile-menu"
-      initial={{opacity:0,y:-25}}
-      animate={{opacity:1,y:0}}
-      exit={{opacity:0,y:-25}}
-      transition={{duration:.3}}
-     >
-
-      {links.map(l=>(
-       <a
-        key={l}
-        href={`#${l}`}
-        onClick={()=>setOpen(false)}
-       >
-        {l.toUpperCase()}
-       </a>
-      ))}
-
-      <a
-       href="/resume.pdf"
-       download
-       className="resume-btn"
+      <button
+        type="button"
+        className="nav-toggle"
+        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={open}
+        aria-controls={open ? "mobile-navigation" : undefined}
+        onClick={() => setOpen((value) => !value)}
       >
-       Resume
-      </a>
+        {open ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
+      </button>
 
-     </motion.div>
-
-    )}
-
-   </AnimatePresence>
-
-  </nav>
- )
+      <AnimatePresence>
+        {open && (
+          <Motion.div
+            id="mobile-navigation"
+            className="mobile-menu"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+          >
+            {renderLinks(true)}
+            <a href="/Ashish_Ahirwar_Python.pdf" download className="resume-btn" onClick={() => setOpen(false)}>Download résumé ↓</a>
+          </Motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
 }

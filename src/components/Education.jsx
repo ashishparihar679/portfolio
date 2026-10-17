@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 const education = [
   {
@@ -60,20 +60,20 @@ export default function Education() {
       id="education"
     >
 
-      <motion.h1
+      <Motion.h1
         className="gradient"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
         Education
-      </motion.h1>
+      </Motion.h1>
 
       <div className="edu-wrapper">
 
         {/* Glow Line */}
 
-        <motion.div
+        <Motion.div
           className="edu-line-glow"
           initial={{ scaleY: 0 }}
           whileInView={{ scaleY: 1 }}
@@ -83,7 +83,7 @@ export default function Education() {
 
         {education.map((e, i) => (
 
-          <motion.div
+          <Motion.div
             key={i}
             className="edu-center"
             initial={{ opacity: 0, y: 50 }}
@@ -92,7 +92,7 @@ export default function Education() {
             viewport={{ once: true }}
           >
 
-            <motion.div
+            <Motion.div
               className="edu-card-modern"
               whileHover={{
                 y: -10,
@@ -147,9 +147,9 @@ export default function Education() {
 
               </div>
 
-            </motion.div>
+            </Motion.div>
 
-          </motion.div>
+          </Motion.div>
 
         ))}
 

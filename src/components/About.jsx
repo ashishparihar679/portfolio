@@ -1,125 +1,55 @@
-import { motion } from "framer-motion";
-import img from "../assets/profile.jpg";
+import { motion as Motion } from "framer-motion";
+import img from "../assets/profile1.jpg";
 
-export default function About(){
+const facts = [
+  { label: "Study", value: "B.Tech · Computer Science" },
+  { label: "Build with", value: "React · Python · Django" },
+  { label: "Currently seeking", value: "Software development opportunities" },
+];
 
- return(
-  <section className="section about-premium" id="about">
+export default function About() {
+  return (
+    <section className="section about-premium" id="about" aria-labelledby="about-title">
+      <div className="about-editorial">
+        <Motion.div
+          className="about-portrait-frame"
+          initial={{ opacity: 0, rotateY: 12, y: 20 }}
+          whileInView={{ opacity: 1, rotateY: 0, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
+        >
+          <img src={img} alt="Ashish Ahirwar, full stack developer" loading="lazy" />
+          <span className="about-portrait-note">Curiosity → code → product</span>
+        </Motion.div>
 
-   {/* TOP PROFILE SECTION */}
+        <div className="about-copy">
+          <p className="section-kicker">A LITTLE ABOUT ME</p>
+          <Motion.h2
+            id="about-title"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="about-heading"
+          >
+            I like making the <em>complex</em> feel simple.
+          </Motion.h2>
+          <p>
+            I’m a Computer Science Engineering student focused on full-stack development. I build responsive web applications with React, Python, Django, Django REST Framework and MySQL, paying attention to clear interfaces, reliable APIs and useful details.
+          </p>
+          <p>
+            Outside product work, I practice Data Structures and Algorithms in C++. I’ve solved 100+ problems and completed the IBM Full Stack Software Developer certificate. I’m looking for software development opportunities where I can keep learning and contribute to real products.
+          </p>
 
-   <motion.div
-     className="about-top"
-     initial={{opacity:0,y:40}}
-     whileInView={{opacity:1,y:0}}
-     viewport={{once:true}}
-     transition={{duration:.8}}
-   >
-
-<motion.img
-  src={img}
-  className="about-avatar"
-  whileHover={{
-    rotateX:10,
-    rotateY:-10,
-    scale:1.08
-  }}
-  transition={{ type:"spring", stiffness:200, damping:12 }}
-/>
-
-    <h1 className="about-name gradient">Ashish Ahirwar</h1>
-
-    <p className="about-role">Full Stack Developer</p>
-
-    <p className="about-desc">
-      I build scalable modern applications using React, Django and MySQL with
-      focus on clean UI and performance.
-    </p>
-
-    {/* MINI INFO CARDS */}
-
-    <div className="about-cards">
-
-      <motion.div
-      className="about-mini glass-hover"
-      whileHover={{scale:1.07}}
-      >
-        <h3>Fresher</h3>
-        <span>Experience</span>
-      </motion.div>
-
-      <motion.div
-      className="about-mini glass-hover"
-      whileHover={{scale:1.07}}
-      >
-        <h3>Full Stack</h3>
-        <span>Speciality</span>
-      </motion.div>
-
-      <motion.div
-      className="about-mini glass-hover"
-      whileHover={{scale:1.07}}
-      >
-        <h3>UI + API</h3>
-        <span>Focus</span>
-      </motion.div>
-
-    </div>
-
-   </motion.div>
-
-
-   {/* ABOUT TEXT */}
-
-   <motion.div
-     className="about-bottom"
-     initial={{opacity:0,y:30}}
-     whileInView={{opacity:1,y:0}}
-     viewport={{once:true}}
-     transition={{duration:.8}}
-   >
-
-    <h2>About Me</h2>
-
-    <p>
-      Final year B.Tech CSE student passionate about building fast,
-      responsive web apps. Skilled in React, Django REST, MySQL and
-      modern tooling.
-    </p>
-
-    <p>
-      Solved 100+ DSA problems and completed IBM Full Stack certification.
-    </p>
-
-   </motion.div>
-
-
-   {/* SKILLS SLIDER */}
-
-   <div className="skills-slider">
-
-     <div className="skills-track">
-
-       <span>⚛️ React</span>
-       <span>🐍 Python</span>
-       <span>🌐 Django</span>
-       <span>🗄️ MySQL</span>
-       <span>📦 Git</span>
-       <span>🚀 REST API</span>
-
-       {/* duplicate for infinite scroll */}
-
-       <span>⚛️ React</span>
-       <span>🐍 Python</span>
-       <span>🌐 Django</span>
-       <span>🗄️ MySQL</span>
-       <span>📦 Git</span>
-       <span>🚀 REST API</span>
-
-     </div>
-
-   </div>
-
-  </section>
- )
+          <div className="about-facts">
+            {facts.map((fact) => (
+              <div className="about-fact" key={fact.label}>
+                <span>{fact.label}</span>
+                <strong>{fact.value}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

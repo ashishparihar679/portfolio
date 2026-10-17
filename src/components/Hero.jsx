@@ -1,45 +1,47 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import img from "../assets/profile.jpg";
-import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowDown } from "react-icons/fa";
+import Scene3D from "./Scene3D";
 
 const roles = [
- "Full Stack Developer",
- "Python Developer",
- "React Developer",
- "Frontend Developer"
+ "Full Stack Python Developer",
+ "React.js Developer",
+ "Python & Django Developer"
 ];
 
 export default function Hero(){
 
  const [index,setIndex] = useState(0);
+ const reduceMotion = useReducedMotion();
 
  useEffect(()=>{
+  if (reduceMotion) return undefined;
   const t = setInterval(()=>{
    setIndex(i => (i+1)%roles.length);
   },2200);
 
   return ()=>clearInterval(t);
 
- },[]);
+ },[reduceMotion]);
 
  return(
 
-  <section className="hero-premium" id="home">
+  <section className="hero-premium" id="home" aria-labelledby="hero-title">
 
    {/* LEFT CONTENT */}
 
-   <motion.div
+   <Motion.div
     className="hero-left"
-    initial={{opacity:0,x:-60}}
+    initial={reduceMotion ? false : {opacity:0,x:-42}}
     animate={{opacity:1,x:0}}
     transition={{duration:1}}
    >
 
-    <h2 className="hello">Hello, I’m</h2>
+    <p className="hero-eyebrow"><span className="status-dot" /> FULL STACK DEVELOPER · BHOPAL, INDIA</p>
 
-    <h1 className="hero-name">
-     <span>Ashish</span> AHIRWAR
+    <h1 className="hero-name" id="hero-title">
+     <span>Ashish</span>
+     <span className="hero-surname">Ahirwar<span className="hero-period">.</span></span>
     </h1>
 
 
@@ -47,24 +49,22 @@ export default function Hero(){
 
     <AnimatePresence mode="wait">
 
-     <motion.div
+     <Motion.div
       key={index}
       className="hero-role2"
-      initial={{y:20,opacity:0}}
+      initial={reduceMotion ? false : {y:20,opacity:0}}
       animate={{y:0,opacity:1}}
       exit={{y:-20,opacity:0}}
       transition={{duration:.4}}
      >
       {roles[index]}
-     </motion.div>
+     </Motion.div>
 
     </AnimatePresence>
 
 
     <p className="hero-sub">
-     I develop real-world web applications using React,
-     Django, and REST APIs with a focus on scalability
-     and usability.
+     I build full-stack web applications with React, Python, Django and REST APIs—combining thoughtful interfaces with reliable backend systems.
     </p>
 
 
@@ -73,16 +73,10 @@ export default function Hero(){
     <div className="hero-actions">
 
      <a className="btn-main" href="#projects">
-      View My Work
+      Explore My Work <span aria-hidden="true">↗</span>
      </a>
-
-     <a
-      className="btn-outline"
-      href="/resume.pdf"
-      download
-     >
-      My Resume
-     </a>
+     <a className="btn-outline" href="#contact">Contact Me</a>
+     <a className="resume-link" href="/Ashish_Ahirwar_Python.pdf" download>Download résumé ↓</a>
 
     </div>
 
@@ -101,21 +95,12 @@ export default function Hero(){
      </a>
 
      <a
-      href="https://www.linkedin.com"
+      href="https://www.linkedin.com/in/ashish-ahirwar-6268ap0000/"
       target="_blank"
       rel="noreferrer"
       className="social linkedin"
      >
       <FaLinkedin/>
-     </a>
-
-     <a
-      href="https://instagram.com"
-      target="_blank"
-      rel="noreferrer"
-      className="social instagram"
-     >
-      <FaInstagram/>
      </a>
 
      <a
@@ -127,20 +112,14 @@ export default function Hero(){
 
     </div>
 
-   </motion.div>
+   </Motion.div>
 
 
    {/* RIGHT IMAGE */}
 
-   <motion.div
-    className="hero-right"
-    animate={{y:[0,-20,0]}}
-    transition={{repeat:Infinity,duration:5}}
-   >
+   <div className="hero-right"><Scene3D /></div>
 
-    <img src={img} alt="profile"/>
-
-   </motion.div>
+   <a className="scroll-cue" href="#about" aria-label="Scroll to About"><span>SCROLL TO EXPLORE</span><FaArrowDown aria-hidden="true" /></a>
 
   </section>
  )

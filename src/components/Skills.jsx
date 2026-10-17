@@ -1,58 +1,71 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
-const skills = [
- { name:"HTML5", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"},
- { name:"CSS3", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"},
- { name:"JavaScript", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"},
- { name:"React", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"},
-//  { name:"Node.js", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"},
- { name:"Python", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"},
- { name:"Django", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"},
- { name:"MySQL", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"},
- { name:"Git", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"},
- { name:"GitHub", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"},
- { name:"Postman", icon:"https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg"},
- { name:"Figma", icon:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"}
+const groups = [
+  {
+    number: "01",
+    title: "Frontend",
+    description: "Responsive interfaces, reusable components and polished user experiences.",
+    skills: ["HTML5", "CSS3", "JavaScript", "React.js", "Figma"],
+  },
+  {
+    number: "02",
+    title: "Backend",
+    description: "Application logic and REST APIs built with Python and Django.",
+    skills: ["Python", "Django", "Django REST Framework", "REST APIs"],
+  },
+  {
+    number: "03",
+    title: "Data & problem solving",
+    description: "Relational data workflows and algorithmic problem solving.",
+    skills: ["MySQL", "C++", "Data Structures & Algorithms"],
+  },
+  {
+    number: "04",
+    title: "Tools & workflow",
+    description: "Tools used to build, test, version and deliver applications.",
+    skills: ["Git", "GitHub", "Postman"],
+  },
 ];
 
-export default function Skills(){
+export default function Skills() {
+  return (
+    <section className="skills-section section" id="skills" aria-labelledby="skills-title">
+      <div className="section-heading-row">
+        <div>
+          <p className="section-kicker">THE TOOLKIT</p>
+          <Motion.h2
+            id="skills-title"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="skills-title"
+          >
+            Skills that <span>ship.</span>
+          </Motion.h2>
+        </div>
+        <p className="section-intro">A practical full-stack toolkit—from the first interface to the data behind it.</p>
+      </div>
 
- return(
-
-  <section className="skills-section" id="skills">
-
-   <motion.h2
-    initial={{opacity:0,y:20}}
-    whileInView={{opacity:1,y:0}}
-    viewport={{once:true}}
-    className="skills-title gradient"
-   >
-    My Skills
-   </motion.h2>
-
-
-   <div className="skills-wall">
-
-    {skills.map((skill,i)=>(
-     <motion.div
-      key={i}
-      className="skill-box glass-hover"
-      initial={{opacity:0,scale:.7}}
-      whileInView={{opacity:1,scale:1}}
-      viewport={{once:true}}
-      transition={{delay:i*0.08}}
-      whileHover={{scale:1.12,y:-5}}
-     >
-
-      <img src={skill.icon} alt={skill.name}/>
-      <span>{skill.name}</span>
-
-     </motion.div>
-    ))}
-
-   </div>
-
-  </section>
-
- )
+      <div className="skill-groups">
+        {groups.map((group, index) => (
+          <Motion.article
+            key={group.number}
+            className={`skill-group skill-group-${index + 1}`}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, delay: index * 0.08 }}
+            whileHover={{ y: -5, rotateX: 2, rotateY: index % 2 ? -2 : 2 }}
+          >
+            <span className="skill-group-number">{group.number}</span>
+            <h3>{group.title}</h3>
+            <p>{group.description}</p>
+            <div className="skill-tags">
+              {group.skills.map((skill) => <span key={skill}>{skill}</span>)}
+            </div>
+          </Motion.article>
+        ))}
+      </div>
+    </section>
+  );
 }

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 
 import ibmCert from "../assets/ibm.jpg";
 import tataCert from "../assets/tata.jpg";
@@ -37,23 +37,37 @@ export default function Certifications(){
 
   const [open,setOpen] = useState(null);
 
+  useEffect(() => {
+    if (!open) return undefined;
+    const previousFocus = document.activeElement;
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setOpen(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+      previousFocus?.focus?.();
+    };
+  }, [open]);
+
   return(
     <section className="section certifications-section" id="certifications">
 
-      <motion.h1
+      <Motion.h1
         className="gradient"
         initial={{opacity:0,y:25}}
         whileInView={{opacity:1,y:0}}
         viewport={{once:true}}
       >
         Certifications
-      </motion.h1>
+      </Motion.h1>
 
       <div className="cert-grid">
 
         {certs.map((c,i)=>(
-          <motion.div
+          <Motion.button
             key={i}
+            type="button"
             className="cert-card glass-hover"
             initial={{ opacity:0, y:40 }}
             whileInView={{ opacity:1, y:0 }}
@@ -61,6 +75,7 @@ export default function Certifications(){
             transition={{ delay:i*0.15 }}
             whileHover={{ scale:1.05, rotateX:4, rotateY:-4 }}
             onClick={()=>setOpen(c)}
+            aria-label={`View ${c.org} ${c.title} certificate`}
           >
 
             <div className="cert-badge">{c.org}</div>
@@ -73,7 +88,7 @@ export default function Certifications(){
               View Certificate →
             </span>
 
-          </motion.div>
+          </Motion.button>
         ))}
 
       </div>
@@ -85,7 +100,7 @@ export default function Certifications(){
 
         {open && (
 
-          <motion.div
+          <Motion.div
             className="modal"
             initial={{opacity:0}}
             animate={{opacity:1}}
@@ -93,8 +108,12 @@ export default function Certifications(){
             onClick={()=>setOpen(null)}
           >
 
-            <motion.div
+            <Motion.div
               className="modal-box"
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${open.org} ${open.title} certificate`}
+              tabIndex={-1}
               initial={{scale:0.85,y:40}}
               animate={{scale:1,y:0}}
               exit={{scale:0.85}}
@@ -106,7 +125,7 @@ export default function Certifications(){
 
                 <img
                   src={open.img}
-                  alt={open.org}
+                  alt={`${open.org} certificate: ${open.title}`}
                   className="cert-img"
                 />
 
@@ -120,14 +139,16 @@ export default function Certifications(){
 
               <button
                 className="btn-modern"
+                autoFocus
+                type="button"
                 onClick={()=>setOpen(null)}
               >
                 Close
               </button>
 
-            </motion.div>
+            </Motion.div>
 
-          </motion.div>
+          </Motion.div>
 
         )}
 

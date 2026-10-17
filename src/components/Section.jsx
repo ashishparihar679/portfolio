@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 export default function Section({ id, title, subtitle, children }) {
   return (
-    <motion.section
+    <Motion.section
       id={id}
       className="section"
       initial={{ opacity: 0, y: 40 }}
@@ -28,6 +28,6 @@ export default function Section({ id, title, subtitle, children }) {
         {children}
       </div>
 
-    </motion.section>
+    </Motion.section>
   );
 }

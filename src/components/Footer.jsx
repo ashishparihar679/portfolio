@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Footer(){
@@ -7,7 +7,7 @@ export default function Footer(){
 
   <footer className="footer">
 
-   <motion.div
+   <Motion.div
     className="footer-content"
     initial={{opacity:0,y:20}}
     whileInView={{opacity:1,y:0}}
@@ -23,6 +23,7 @@ export default function Footer(){
       href="https://github.com/ashishparihar679"
       target="_blank"
       rel="noreferrer"
+      aria-label="GitHub profile"
      >
       <FaGithub/>
      </a>
@@ -31,6 +32,7 @@ export default function Footer(){
       href="https://www.linkedin.com/in/ashish-ahirwar-6268ap0000/"
       target="_blank"
       rel="noreferrer"
+      aria-label="LinkedIn profile"
      >
       <FaLinkedin/>
      </a>
@@ -40,10 +42,10 @@ export default function Footer(){
     {/* COPYRIGHT */}
 
     <p className="footer-text">
-     © 2026 Ashish Parihar — Built with React & Framer Motion
+     © {new Date().getFullYear()} Ashish Ahirwar
     </p>
 
-   </motion.div>
+   </Motion.div>
 
   </footer>
 

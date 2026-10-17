@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 const experience = [
   {
@@ -19,19 +19,19 @@ export default function Experience() {
   return (
     <section className="section experience-modern" id="experience">
 
-      <motion.h1
+      <Motion.h1
         className="gradient"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
         Experience
-      </motion.h1>
+      </Motion.h1>
 
       <div className="exp-wrapper">
 
         {experience.map((e, i) => (
-          <motion.div
+          <Motion.div
             key={i}
             className="exp-card glass-hover"
             initial={{ opacity: 0, y: 40 }}
@@ -56,7 +56,7 @@ export default function Experience() {
               ))}
             </ul>
 
-          </motion.div>
+          </Motion.div>
         ))}
 
       </div>
