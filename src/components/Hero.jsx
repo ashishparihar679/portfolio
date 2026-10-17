@@ -37,7 +37,7 @@ export default function Hero(){
     transition={{duration:1}}
    >
 
-    <p className="hero-eyebrow"><span className="status-dot" /> FULL STACK DEVELOPER · BHOPAL, INDIA</p>
+    <p className="hero-eyebrow"><span className="status-dot" /> FULL STACK DEVELOPER · BENGALURU, INDIA</p>
 
     <h1 className="hero-name" id="hero-title">
      <span>Ashish</span>

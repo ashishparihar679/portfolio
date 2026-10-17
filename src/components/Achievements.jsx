@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion as Motion, AnimatePresence } from "framer-motion";
+import { FiAward, FiCode, FiLayers, FiBookOpen, FiZap } from "react-icons/fi";
 import cert from "../assets/certificate.jpg";
 
 const data = [
   {
-    icon: "💻",
+    icon: FiCode,
     title: "DSA Practice",
     value: 100,
     suffix: "+",
@@ -12,7 +13,7 @@ const data = [
   },
 
   {
-    icon: "🧩",
+    icon: FiLayers,
     title: "Full Stack Projects",
     value: 5,
     suffix: "+",
@@ -20,7 +21,7 @@ const data = [
   },
 
   {
-    icon: "⭐",
+    icon: FiAward,
     title: "HackerRank",
     value: 3,
     suffix: "★",
@@ -28,7 +29,7 @@ const data = [
   },
 
   {
-    icon: "🎓",
+    icon: FiBookOpen,
     title: "IBM Certificate",
     value: null,
     suffix: "",
@@ -36,7 +37,7 @@ const data = [
   },
 
   {
-    icon: "🚀",
+    icon: FiZap,
     title: "AI Powered Career Boost Hackathon",
     value: null,
     suffix: "",
@@ -82,6 +83,50 @@ function Counter({ to, suffix }) {
   );
 }
 
+function AchievementCard({ achievement, index, onViewCertificate }) {
+  const Icon = achievement.icon;
+  const tiltCard = (event) => {
+    if (event.pointerType === "touch" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    event.currentTarget.style.setProperty("--tilt-x", `${-y * 4}deg`);
+    event.currentTarget.style.setProperty("--tilt-y", `${x * 4}deg`);
+  };
+
+  const resetTilt = (event) => {
+    event.currentTarget.style.setProperty("--tilt-x", "0deg");
+    event.currentTarget.style.setProperty("--tilt-y", "0deg");
+  };
+
+  return (
+    <Motion.article
+      className="achievement-card"
+      initial={{ opacity: 0, y: 22 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ delay: index * 0.08, duration: 0.45 }}
+      onPointerMove={tiltCard}
+      onPointerLeave={resetTilt}
+      onPointerCancel={resetTilt}
+    >
+      <div className="achievement-icon" aria-hidden="true"><Icon /></div>
+      <div className="achievement-body">
+        <h3>{achievement.title}</h3>
+        {achievement.value && <div className="achievement-value"><Counter to={achievement.value} suffix={achievement.suffix} /></div>}
+        <p>{achievement.desc}</p>
+      </div>
+      <div className="achievement-actions">
+        {achievement.title === "IBM Certificate" && (
+          <button type="button" className="achievement-link" onClick={onViewCertificate}>View certificate ↗</button>
+        )}
+        {achievement.live && <a className="achievement-link" href={achievement.live} target="_blank" rel="noopener noreferrer">Live project ↗</a>}
+        {achievement.github && <a className="achievement-link" href={achievement.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
+      </div>
+    </Motion.article>
+  );
+}
+
 export default function Achievements() {
   const [open, setOpen] = useState(false);
 
@@ -103,76 +148,26 @@ export default function Achievements() {
       className="section achievements-section"
       id="achievements"
     >
-      <Motion.h1
-        className="gradient"
-        initial={{ opacity: 0, y: 25 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-      >
-        Achievements
-      </Motion.h1>
+      <div className="achievement-heading">
+        <Motion.h1
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Achievements<span>.</span>
+        </Motion.h1>
+        <p>Milestones and projects that reflect my growth as a developer.</p>
+      </div>
 
-      {/* Timeline */}
-
-      <div className="timeline">
-
-        {data.map((a, i) => (
-
-          <Motion.article
-            key={i}
-            className="timeline-item glass-hover"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.15 }}
-            whileHover={{ y: -4 }}
-          >
-
-            <div className="timeline-icon">
-              {a.icon}
-            </div>
-
-            <div className="timeline-content">
-
-              <h3>
-                {a.title}{" "}
-
-                {a.value && (
-                  <Counter
-                    to={a.value}
-                    suffix={a.suffix}
-                  />
-                )}
-
-              </h3>
-              <p>{a.desc}</p>
-
-              {/* Hackathon Buttons */}
-
-             
-
-
-              {/* Certificate */}
-
-              {a.title === "IBM Certificate" && (
-                <button type="button" className="view-cert-action" onClick={() => setOpen(true)}>
-                  View certificate ↗
-                </button>
-              )}
-
-              {(a.live || a.github) && (
-                <div className="timeline-links">
-                  {a.live && <a href={a.live} target="_blank" rel="noopener noreferrer">Live project ↗</a>}
-                  {a.github && <a href={a.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
-                </div>
-              )}
-
-            </div>
-
-          </Motion.article>
-
+      <div className="achievement-grid">
+        {data.map((achievement, index) => (
+          <AchievementCard
+            key={achievement.title}
+            achievement={achievement}
+            index={index}
+            onViewCertificate={() => setOpen(true)}
+          />
         ))}
-
       </div>
 
       {/* Certificate Modal */}

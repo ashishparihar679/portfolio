@@ -148,7 +148,7 @@ export default function Contact() {
               <div>
                 <h4>Location</h4>
 
-                <p>Bhopal, Madhya Pradesh</p>
+                <p>Bengaluru, Karnataka</p>
               </div>
             </div>
 
